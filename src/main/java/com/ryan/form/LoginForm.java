@@ -1,9 +1,13 @@
 package com.ryan.form;
 
+import javax.validation.constraints.NotBlank;
+
 public class LoginForm {
 
+    @NotBlank(message = "Username can not be blank")
     private String username;
 
+    @NotBlank(message = "Password can not be blank")
     private String password;
 
     public String getUsername() {
