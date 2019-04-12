@@ -9,28 +9,42 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Register Page</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            color: #474747;
+        }
+        .btn {
+            border: 1px solid forestgreen;
+            color: #fff;
+            background-color: forestgreen;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 <form:form action="/register" method="post" modelAttribute="registerForm">
-    <form:label path="name">Ho va ten:</form:label>
+    <form:label path="name">Name:</form:label>
     <form:input path="name"/>
     <br>
     <form:label path="email">Email:</form:label>
     <form:input path="email"/>
     <br>
-    <form:label path="password">Mat khau:</form:label>
+    <form:label path="password">Password:</form:label>
     <form:password path="password"/>
     <br>
-    <form:label path="checkPassword">Nhap lai mat khau:</form:label>
+    <form:label path="checkPassword">Retry Password:</form:label>
     <form:password path="checkPassword"/>
     <br>
-    <form:label path="phoneNumber">So dien thoai:</form:label>
+    <form:label path="phoneNumber">Phone Number:</form:label>
     <form:input path="phoneNumber"/>
     <br>
     <form:radiobuttons path="gender" items="${gender}"/>
-    <br>
-    <input type="submit" value="Dang ky"/>
+    <br><br>
+    <input type="submit" class="btn" value="Register"/>
 </form:form>
 </body>
 </html>

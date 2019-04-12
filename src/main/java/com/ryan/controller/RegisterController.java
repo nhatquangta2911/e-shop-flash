@@ -53,8 +53,8 @@ public class RegisterController {
     @ModelAttribute("gender")
     public Map<String, String> getGenders() {
         Map<String, String> genders = new HashMap<String, String>();
-        genders.put("M", "Nam");
-        genders.put("F", "Nu");
+        genders.put("M", "Male");
+        genders.put("F", "Female");
         return genders;
     }
 }

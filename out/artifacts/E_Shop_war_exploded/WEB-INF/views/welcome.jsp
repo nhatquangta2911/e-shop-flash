@@ -10,20 +10,34 @@
 
 <html>
 <head>
-    <title>Welcome</title>
+    <title>Welcome Page</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            color: #474747;
+        }
+        a {
+            border: 1px solid forestgreen;
+            color: #fff;
+            background-color: forestgreen;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 <c:choose>
-    <c:when test="${not empty username}">
-        Chao mung ${username} den voi website cua minh
-        <br>
-        <a href="/logout">Logout</a>
+    <c:when test="${not empty user.getName()}">
+        <p>Welcome <span style="color: forestgreen; font-weight: bold;">${user.getName()}</span> to my website!</p><br>
+        <a href="/profile">View Profile</a>
+        <a href="/logout">Log Out</a>
     </c:when>
     <c:otherwise>
-        Vui long dang ky hoac dang nhap
-        <br>
-        <a href="/register">Dang ky</a>
-        <a href="/login">Dang nhap</a>
+        Please Log In or Register first!
+        <br><br>
+        <a href="/login">Log In</a>
+        <a href="/register">Register</a>
     </c:otherwise>
 </c:choose>
 </body>

@@ -4,17 +4,31 @@
 <html>
 <head>
     <title>Login page</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            color: #474747;
+        }
+        .btn {
+            border: 1px solid forestgreen;
+            color: #fff;
+            background-color: forestgreen;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-${message}
-<form:form action="/login" method="post" modelAttribute="loginForm">
+<span style="font-weight: bold; color: red;">${message}</span><br>
+<form:form cssStyle="width: 400px;" action="/login" method="post" modelAttribute="loginForm">
     <form:label path="email">Email:</form:label>
     <form:input path="email"/>
-    <br>
-    <form:label path="password">Mat khau:</form:label>
+    <br><br>
+    <form:label path="password">Password:</form:label>
     <form:password path="password"/>
-    <br>
-    <input type="submit" value="Dang nhap"/>
+    <br><br>
+    <input class="btn" type="submit" value="Log In"/>
 </form:form>
 </body>
 </html>

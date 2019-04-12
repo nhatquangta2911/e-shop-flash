@@ -25,7 +25,7 @@ public class LoginController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(final HttpSession session) {
-        session.removeAttribute("username");
+        session.removeAttribute("user");
         return "redirect:/welcome";
     }
 
@@ -37,18 +37,18 @@ public class LoginController {
         List<Account> users =
                 (List<Account>) session.getAttribute("users");
         if (users == null || users.isEmpty()) {
-            model.addAttribute("message", "Tai khoan hoac mat khau khoong dung");
+            model.addAttribute("message", "Username or Password might not correct!");
             return "login";
         }
         for (int i = 0; i < users.size(); ++i) {
             Account account = users.get(i);
             if (account.getEmail().equals(loginForm.getEmail()) &&
                     account.getPassword().equals(loginForm.getPassword())) {
-                session.setAttribute("username", account.getName());
+                session.setAttribute("user", account);
                 return "redirect:/welcome";
             }
         }
-        model.addAttribute("message", "Tai khoan hoac mat khau khoong dung");
+        model.addAttribute("message", "Username or Password might not correct!");
         return "login";
     }
 //    @RequestMapping(value = "/login", method = RequestMethod.POST)
