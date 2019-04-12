@@ -1,6 +1,7 @@
 package com.ryan.controller;
 
 import com.ryan.form.LoginForm;
+import com.ryan.javabean.Account;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
 
 @Controller
 public class LoginController {
@@ -20,23 +23,52 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@Validated @ModelAttribute("loginForm") final LoginForm loginForm,
-                        BindingResult errors,
-                        final Model model) {
-        final String username = loginForm.getUsername();
-        final String password = loginForm.getPassword();
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(final HttpSession session) {
+        session.removeAttribute("username");
+        return "redirect:/welcome";
+    }
 
-        if(errors.hasErrors()) {
-            model.addAttribute("message","Oop!! Something wrong");
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String doLogin(final Model model,
+                          @ModelAttribute("loginForm")
+                          final LoginForm loginForm,
+                          BindingResult errors, HttpSession session) {
+        List<Account> users =
+                (List<Account>) session.getAttribute("users");
+        if (users == null || users.isEmpty()) {
+            model.addAttribute("message", "Tai khoan hoac mat khau khoong dung");
             return "login";
         }
-
-        if (username != null && "123456".equals(password)) {
-            model.addAttribute("username", username);
-            return "/welcome";
+        for (int i = 0; i < users.size(); ++i) {
+            Account account = users.get(i);
+            if (account.getEmail().equals(loginForm.getEmail()) &&
+                    account.getPassword().equals(loginForm.getPassword())) {
+                session.setAttribute("username", account.getName());
+                return "redirect:/welcome";
+            }
         }
-
+        model.addAttribute("message", "Tai khoan hoac mat khau khoong dung");
         return "login";
     }
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String login(@Valid @ModelAttribute("loginForm") final LoginForm loginForm,
+//                        BindingResult bindingResult,
+//                        final Model model) {
+//        final String email = loginForm.getEmail();
+//        final String password = loginForm.getPassword();
+//
+//        if(bindingResult.hasErrors()) {
+//            System.out.println("Error");
+//            return "login";
+//        }
+//        if (email != null && "123".equals(password)) {
+//            model.addAttribute("email", email);
+//            System.out.println(email);
+//            return "/welcome";
+//        } else {
+//            model.addAttribute("errMessage", "Oop!!");
+//            return "login";
+//        }
+//    }
 }
