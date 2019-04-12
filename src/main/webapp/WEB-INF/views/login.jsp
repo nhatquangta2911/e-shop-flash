@@ -7,16 +7,14 @@
 </head>
 <body>
 ${message}
-<form:form method="post" modelAttribute="loginForm" action="/login">
-    <form:label path="username">Username:</form:label>
-    <form:input path="username"/>
-    <form:errors path="username"></form:errors>
+<form:form action="/login" method="post" modelAttribute="loginForm">
+    <form:label path="email">Email:</form:label>
+    <form:input path="email"/>
     <br>
-    <form:label path="password">Password:</form:label>
+    <form:label path="password">Mat khau:</form:label>
     <form:password path="password"/>
-    <form:errors path="password"></form:errors>
     <br>
-    <input type="submit" value="Login">
+    <input type="submit" value="Dang nhap"/>
 </form:form>
 </body>
 </html>
