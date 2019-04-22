@@ -23,6 +23,17 @@
             padding: 5px 10px;
             border-radius: 4px;
             text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .my-btn {
+            width: 150px;
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -36,8 +47,26 @@
     <c:otherwise>
         Please Log In or Register first!
         <br><br>
-        <a href="/login">Log In</a>
-        <a href="/register">Register</a>
+        <div class="wrapper">
+            <div class="my-btn">
+                <a href="/login">Log In</a>
+            </div>
+            <div class="my-btn">
+                <a href="/register">Register</a>
+            </div>
+            <div class="my-btn">
+                <a href="/getAllUsers">Show All Users</a>
+            </div>
+            <div class="my-btn">
+                <a href="/getUser">Show User</a>
+            </div>
+            <div class="my-btn">
+                <a href="/addUser">Add User</a>
+            </div>
+            <div class="my-btn">
+                <a href="/deleteUser">Delete User</a>
+            </div>
+        </div>
     </c:otherwise>
 </c:choose>
 </body>
