@@ -44,7 +44,7 @@ public class LoginController {
             if (account.getEmail().equals(loginForm.getEmail()) &&
                     account.getPassword().equals(loginForm.getPassword())) {
                 session.setAttribute("user", account);
-                return "redirect:/welcome";
+                return "redirect:/getAllUsers";
             }
         }
         model.addAttribute("message", "Username or Password might not correct!");
