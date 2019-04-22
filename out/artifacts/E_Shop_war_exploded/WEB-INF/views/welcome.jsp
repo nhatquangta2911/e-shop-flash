@@ -24,16 +24,18 @@
             border-radius: 4px;
             text-decoration: none;
             margin-bottom: 20px;
+            width: 25%;
         }
 
         .wrapper {
             display: flex;
             flex-wrap: wrap;
+            flex-direction: column;
         }
 
         .my-btn {
-            width: 150px;
-            margin: 20px 0;
+            width: 100%;
+            margin: 10px 0;
         }
     </style>
 </head>

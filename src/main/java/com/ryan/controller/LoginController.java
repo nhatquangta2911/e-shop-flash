@@ -29,16 +29,24 @@ public class LoginController {
         return "login";
     }
 
+    public String doLogout(final Model model,
+                           HttpSession session) {
+        session.removeAttribute("user");
+        return "welcome";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String doLogin(@Valid LoginForm loginForm,
                           BindingResult result,
-                          final Model model) {
+                          final Model model,
+                          HttpSession session) {
         if(result.hasErrors()) {
             return "login_user";
         }
         boolean userExists = loginService.checkLogin(loginForm.getEmail(), loginForm.getPassword());
         if(userExists) {
             model.addAttribute("loginForm", loginForm);
+            session.setAttribute("user", loginForm);
             return "redirect:/welcome";
         } else {
             model.addAttribute("error", "Email or Password might not correct");
