@@ -19,6 +19,16 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @RequestMapping(value = "/doLogin", method = RequestMethod.GET)
+    public String doLogin() {
+        return "login_user";
+    }
+
+    @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+    public String doLogin(final Model model) {
+        return "";
+    }
+
     @RequestMapping(value = "/getAllUsers", method = RequestMethod.GET)
     public String getAllUsers(final Model model) {
         List<User> users = userService.getAllUsers();
