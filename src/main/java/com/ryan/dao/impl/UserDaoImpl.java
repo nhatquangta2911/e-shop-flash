@@ -4,6 +4,7 @@ import com.ryan.dao.UserDao;
 import com.ryan.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,6 +36,14 @@ public class UserDaoImpl implements UserDao {
         final Session session = sessionFactory.getCurrentSession();
         final User user = session.get(User.class, userId);
         return user;
+    }
+
+    public User getUserByEmail(String userEmail) {
+        final Session session = sessionFactory.getCurrentSession();
+        final Query query =
+                session.createQuery("FROM User u WHERE u.email = :email");
+        query.setParameter("email", userEmail);
+        return (User) query.uniqueResult();
     }
 
     public List<User> getAllUsers() {

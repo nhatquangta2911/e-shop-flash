@@ -28,6 +28,10 @@ public class UserServiceImpl implements UserService {
         return userDao.getUserById(userId);
     }
 
+    public User getUserByEmail(final String userEmail) {
+        return userDao.getUserByEmail(userEmail);
+    }
+
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
