@@ -1,8 +1,10 @@
 package com.ryan.controller;
 
+import com.ryan.entity.User;
 import com.ryan.form.LoginForm;
 import com.ryan.javabean.Account;
 import com.ryan.service.LoginService;
+import com.ryan.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +22,7 @@ import java.util.List;
 public class LoginController {
 
     @Resource
-    private LoginService loginService;
+    private UserService userService;
 
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -38,16 +40,17 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String doLogin(@Valid LoginForm loginForm,
                           BindingResult result,
-                          final Model model,
-                          HttpSession session) {
+                          final Model model) {
         if(result.hasErrors()) {
             return "login_user";
         }
-        boolean userExists = loginService.checkLogin(loginForm.getEmail(), loginForm.getPassword());
-        if(userExists) {
-            model.addAttribute("loginForm", loginForm);
-            session.setAttribute("user", loginForm);
-            return "redirect:/welcome";
+
+        User user = userService.getUserByEmail(loginForm.getEmail());
+        System.out.println(user.getEmail());
+
+        if(user != null && user.getPassword().equals(loginForm.getPassword()) ) {
+            model.addAttribute("user", user.getFullName());
+            return "welcome";
         } else {
             model.addAttribute("error", "Email or Password might not correct");
             return "login_user";

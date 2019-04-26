@@ -44,8 +44,12 @@ public class UserController {
     @RequestMapping(value = "/getUser", method = RequestMethod.POST)
     public String getUser(final Model model, @RequestParam("userId") final int userId) {
         final User user = userService.getUserById(userId);
-        model.addAttribute("user", user);
-        return "show_user";
+        if(user != null) {
+            model.addAttribute("user", user);
+            return "show_user";
+        } else {
+            return "show_user";
+        }
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.GET)
